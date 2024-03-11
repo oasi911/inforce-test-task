@@ -1,18 +1,21 @@
-import React, { useState } from "react";
-import styles from "./AddProductModal.module.css";
+import React, { useState, useEffect } from "react";
+import styles from "./ProductModal.module.css";
 
-const AddProductModal = ({ isOpen, onClose, onSave }) => {
+const ProductModal = ({ isOpen, onClose, onSave, initialProduct = null }) => {
   const [product, setProduct] = useState({
     imageUrl: "",
     name: "",
     count: "",
-    size: {
-      width: "",
-      height: "",
-    },
+    size: { width: "", height: "" },
     weight: "",
     comments: [],
   });
+
+  useEffect(() => {
+    if (initialProduct) setProduct(initialProduct);
+  }, [initialProduct]);
+
+  const isEditMode = initialProduct !== null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +38,7 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Add New Product</h2>
+        <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
         <form onSubmit={handleSubmit}>
           <input
             name="name"
@@ -89,4 +92,4 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
   );
 };
 
-export default AddProductModal;
+export default ProductModal;

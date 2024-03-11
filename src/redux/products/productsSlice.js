@@ -52,6 +52,29 @@ export const deleteProductAsync = createAsyncThunk(
   }
 );
 
+export const updateProductAsync = createAsyncThunk(
+  "products/updateProductAsync",
+  async (product, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/products/${product.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(product),
+        }
+      );
+      if (!response.ok) throw new Error("Failed to update product");
+      const updatedProduct = await response.json();
+      return updatedProduct;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState: { items: [], status: null, error: null },

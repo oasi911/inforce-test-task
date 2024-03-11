@@ -1,4 +1,3 @@
-// pages/ProductsPage.js
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,7 +5,8 @@ import {
   deleteProductAsync,
   fetchProductsAsync,
 } from "../redux/products/productsSlice";
-import AddProductModal from "../components/AddProductModal";
+import ProductModal from "../components/ProductModal";
+import { Link } from "react-router-dom";
 
 const ProductsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +28,7 @@ const ProductsPage = () => {
   return (
     <div>
       <button onClick={() => setIsModalOpen(true)}>Add New Product</button>
-      <AddProductModal
+      <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveProduct}
@@ -38,7 +38,7 @@ const ProductsPage = () => {
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              {product.name}
+              <Link to={`/products/${product.id}`}>{product.name}</Link>
               <button onClick={() => handleDelete(product.id)}>Delete</button>
             </li>
           ))}
