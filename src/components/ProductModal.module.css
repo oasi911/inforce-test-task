@@ -1,0 +1,21 @@
+.modalOverlay {
+  background-color: #f0f0f0;
+  padding: 20px;
+  width: 250px;
+}
+
+.name {
+  margin: 0;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

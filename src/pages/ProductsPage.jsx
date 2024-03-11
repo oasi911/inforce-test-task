@@ -7,6 +7,7 @@ import {
 } from "../redux/products/productsSlice";
 import ProductModal from "../components/ProductModal";
 import { Link } from "react-router-dom";
+import styles from "./ProductsPage.module.css";
 
 const ProductsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,8 +38,8 @@ const ProductsPage = () => {
         <h1>Products</h1>
         <ul>
           {products.map((product) => (
-            <li key={product.id}>
-              <Link to={`/products/${product.id}`}>{product.name}</Link>
+            <li className={styles.list} key={product.id}>
+              <Link to={`/${product.id}`}>{product.name}</Link>
               <button onClick={() => handleDelete(product.id)}>Delete</button>
             </li>
           ))}

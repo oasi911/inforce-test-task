@@ -4,6 +4,7 @@ import {
   addCommentAsync,
   deleteCommentAsync,
 } from "../redux/comments/commentsSlice";
+import styles from "./CommentSection.module.css";
 
 const CommentSection = ({ productId, comments }) => {
   const dispatch = useDispatch();
@@ -30,13 +31,13 @@ const CommentSection = ({ productId, comments }) => {
       <h2>Comments</h2>
       <ul>
         {comments.map((comment) => (
-          <li key={comment.id}>
+          <li className={styles.list} key={comment.id}>
             {comment.description}
             <button onClick={() => handleDelete(comment.id)}>Delete</button>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <textarea value={newComment} onChange={handleChange} />
         <button type="submit">Add Comment</button>
       </form>

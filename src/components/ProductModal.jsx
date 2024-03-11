@@ -38,8 +38,8 @@ const ProductModal = ({ isOpen, onClose, onSave, initialProduct = null }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className={styles.name}>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <input
             name="name"
             value={product.name}
