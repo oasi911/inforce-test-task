@@ -6,12 +6,16 @@ import {
   updateProductAsync,
 } from "../redux/products/productsSlice";
 import ProductModal from "../components/ProductModal";
+import CommentSection from "../components/CommentSection";
 
 const ProductPage = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) =>
     state.products.items.find((product) => product.id.toString() === productId)
+  );
+  const comments = useSelector((state) =>
+    state.comments.items.filter((comment) => comment.productId === productId)
   );
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -50,7 +54,6 @@ const ProductPage = () => {
         Size: {product.size.width} x {product.size.height}
       </p>
       <p>Weight: {product.weight}</p>
-      {/* Display other details */}
       <button onClick={handleEdit}>Edit</button>
 
       <ProductModal
@@ -59,6 +62,8 @@ const ProductPage = () => {
         onSave={handleSaveProduct}
         initialProduct={product}
       />
+
+      <CommentSection productId={productId} comments={comments} />
     </div>
   );
 };
